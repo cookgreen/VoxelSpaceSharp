@@ -1,0 +1,8 @@
+*.exe
+*.manifest
+*.resources
+*.pdb
+*.suo
+*.cache
+*.config
+obj/*
