@@ -28,6 +28,7 @@ namespace VoxelSpaceSharp
         private Color[,] diffuseMap;
         private Point p = new Point(100, 100);
         private bool isIncreasing = false;
+        private double degrees = 0;
         public frmMain()
         {
             InitializeComponent();
@@ -51,21 +52,21 @@ namespace VoxelSpaceSharp
         {
             if (rendering)
             {
-                Render(p, 78, 120, 120, 300, canvas.Width, canvas.Height, e.Graphics);
-                if (!isIncreasing && p.Y != 1)
+                Render(p, degrees, 78, 120, 120, 300, canvas.Width, canvas.Height, e.Graphics);
+                if (!isIncreasing && degrees != 0)
                 {
-                    p.Y -= 10;
+                    degrees -= 10;
                 }
-                else if (p.Y == 1)
+                else if (degrees == 0)
                 {
                     isIncreasing = true;
-                    p.Y += 10;
+                    degrees += 10;
                 }
-                else if (isIncreasing && p.Y != 100)
+                else if (isIncreasing && degrees != 360)
                 {
-                    p.Y += 10;
+                    degrees += 10;
                 }
-                else if (p.Y == 100)
+                else if (degrees == 360)
                 {
                     isIncreasing = false;
                 }
@@ -91,16 +92,25 @@ namespace VoxelSpaceSharp
                 txtHeightMap.Text = dialog.FileName;
             }
         }
-        private void Render(Point p, int height, int horizon, int scale_height, int distance, int screen_width, int screen_height, Graphics g)
+        private void Render(Point p, double degrees, int height, int horizon, int scale_height, int distance, int screen_width, int screen_height, Graphics g)
         {
             #region Solution 1
             g.Clear(Color.FromArgb(102, 163, 225));
+
+            double sinphi = Math.Sin(GetAnge(degrees));
+            double cosphi = Math.Cos(GetAnge(degrees));
+
             for (int z = distance; z > 1; z--)
             {
-                PointF pLeft = new PointF(-z + p.X, -z + p.Y);
-                PointF pRight = new PointF(z + p.X, -z + p.Y);
+                PointF pLeft = new PointF(
+                    (float)(-cosphi * z - sinphi * z) + p.X,
+                    (float)(sinphi * z - cosphi * z) + p.Y);
+                PointF pRight = new PointF(
+                    (float)(cosphi * z - sinphi * z) + p.X,
+                    (float)(-sinphi * z - cosphi * z) + p.Y);
 
                 float dx = (float)(pRight.X - pLeft.X) / (float)screen_width;
+                float dy = (float)(pRight.Y - pLeft.Y) / (float)screen_width;
                 for (int i = 0; i < screen_width; i++)
                 {
                     int diffuseX = (int)pLeft.X & (DIFFUSE_BITMAP_WIDTH - 1);
@@ -113,6 +123,7 @@ namespace VoxelSpaceSharp
                     Color color = diffuseMap[diffuseX & (DIFFUSE_BITMAP_WIDTH - 1), diffuseY & (DIFFUSE_BITMAP_HEIGHT - 1)];
                     DrawVerticalLine(i, (int)height_on_screen, screen_height, color, g);
                     pLeft.X += dx;
+                    pLeft.Y += dy;
                 }
             }
             #endregion
@@ -152,6 +163,11 @@ namespace VoxelSpaceSharp
                 deltaZ += 0.005f;
             }*/
             #endregion
+        }
+
+        private double GetAnge(double degrees)
+        {
+            return Math.PI * degrees / 180;
         }
 
         private void DrawVerticalLine(int x, int ytop, int ybottom, Color col, Graphics g)
