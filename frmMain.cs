@@ -29,12 +29,13 @@ namespace VoxelSpaceSharp
         private Point p = new Point(100, 100);
         private bool isIncreasing = false;
         private double degrees = 0;
+        private float[] yBuffer;
         public frmMain()
         {
             InitializeComponent();
             timer = new System.Windows.Forms.Timer();
             timer.Tick += Timer_Tick;
-            timer.Interval = 5000;
+            timer.Interval = 100;
             timer.Start();
         }
 
@@ -52,7 +53,7 @@ namespace VoxelSpaceSharp
         {
             if (rendering)
             {
-                Render(p, degrees, 78, 120, 120, 300, canvas.Width, canvas.Height, e.Graphics);
+                Render(p, degrees, 100, 120, 120, 300, canvas.Width, canvas.Height, e.Graphics);
                 if (!isIncreasing && degrees != 0)
                 {
                     degrees -= 10;
@@ -97,10 +98,18 @@ namespace VoxelSpaceSharp
             #region Solution 1
             g.Clear(Color.FromArgb(102, 163, 225));
 
+            yBuffer = new float[screen_width];
+            for (int i = 0; i < yBuffer.Length; i++)
+            {
+                yBuffer[i] = screen_height;
+            }
+
             double sinphi = Math.Sin(GetAnge(degrees));
             double cosphi = Math.Cos(GetAnge(degrees));
 
-            for (int z = distance; z > 1; z--)
+            float z = 1;
+            float dz = 1;
+            while (z < distance)
             {
                 PointF pLeft = new PointF(
                     (float)(-cosphi * z - sinphi * z) + p.X,
@@ -121,10 +130,16 @@ namespace VoxelSpaceSharp
                     float heightOfHeightMap = heightMap[heightX & (HEIGHT_BITMAP_WIDTH - 1), heightY & (HEIGHT_BITMAP_HEIGT - 1)];
                     float height_on_screen = (float)(height - heightOfHeightMap) / (float)z * (float)scale_height + (float)horizon;
                     Color color = diffuseMap[diffuseX & (DIFFUSE_BITMAP_WIDTH - 1), diffuseY & (DIFFUSE_BITMAP_HEIGHT - 1)];
-                    DrawVerticalLine(i, (int)height_on_screen, screen_height, color, g);
+                    DrawVerticalLine(i, (int)height_on_screen, yBuffer[i], color, g);
+                    if (height_on_screen < yBuffer[i])
+                    {
+                        yBuffer[i] = height_on_screen;
+                    }
                     pLeft.X += dx;
                     pLeft.Y += dy;
                 }
+                z += dz;
+                dz += 0.2f;
             }
             #endregion
 
@@ -170,7 +185,7 @@ namespace VoxelSpaceSharp
             return Math.PI * degrees / 180;
         }
 
-        private void DrawVerticalLine(int x, int ytop, int ybottom, Color col, Graphics g)
+        private void DrawVerticalLine(int x, int ytop, float ybottom, Color col, Graphics g)
         {
             #region Solution 1
             //float startY = ytop;
