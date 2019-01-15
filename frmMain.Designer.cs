@@ -180,9 +180,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(873, 699);
             this.Controls.Add(this.grid);
+            this.KeyPreview = true;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Voxel Space Algorithm Demo";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             this.groupFile.ResumeLayout(false);
             this.groupFile.PerformLayout();
             this.groupRender.ResumeLayout(false);

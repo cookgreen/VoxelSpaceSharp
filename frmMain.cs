@@ -54,23 +54,6 @@ namespace VoxelSpaceSharp
             if (rendering)
             {
                 Render(p, degrees, 100, 120, 120, 300, canvas.Width, canvas.Height, e.Graphics);
-                if (!isIncreasing && degrees != 0)
-                {
-                    degrees -= 10;
-                }
-                else if (degrees == 0)
-                {
-                    isIncreasing = true;
-                    degrees += 10;
-                }
-                else if (isIncreasing && degrees != 360)
-                {
-                    degrees += 10;
-                }
-                else if (degrees == 360)
-                {
-                    isIncreasing = false;
-                }
             }
         }
 
@@ -104,8 +87,8 @@ namespace VoxelSpaceSharp
                 yBuffer[i] = screen_height;
             }
 
-            double sinphi = Math.Sin(GetAnge(degrees));
-            double cosphi = Math.Cos(GetAnge(degrees));
+            double sinphi = Math.Sin(GetRadian(degrees));
+            double cosphi = Math.Cos(GetRadian(degrees));
 
             float z = 1;
             float dz = 1;
@@ -180,7 +163,7 @@ namespace VoxelSpaceSharp
             #endregion
         }
 
-        private double GetAnge(double degrees)
+        private double GetRadian(double degrees)
         {
             return Math.PI * degrees / 180;
         }
@@ -294,6 +277,34 @@ namespace VoxelSpaceSharp
                 //    }
                 //}
                 #endregion
+            }
+        }
+
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!rendering)
+                return;
+            Keys k = e.KeyCode;
+            switch(k)
+            {
+                case Keys.W:
+                    p.Y -= 10;
+                    break;
+                case Keys.A:
+                    p.X -= 10;
+                    break;
+                case Keys.S:
+                    p.Y += 10;
+                    break;
+                case Keys.D:
+                    p.X += 10;
+                    break;
+                case Keys.N:
+                    degrees += 10;
+                    break;
+                case Keys.M:
+                    degrees -= 10;
+                    break;
             }
         }
     }
