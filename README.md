@@ -6,10 +6,5 @@ Re-implement Comanche's voxel space terrain rendering algorithm with csharp
 
 ## Usage
 
-W - Camera Forward  
-A - Camera Left  
-S - Camera Backward  
-D - Camera Right  
-
-M - Camera Left Rotation  
-N - Camera Right Rotation  
+W/S - Camera Forward/Backward
+A/D - Camera Left Rotation/Right Rotation

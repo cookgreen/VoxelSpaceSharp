@@ -26,8 +26,7 @@ namespace VoxelSpaceSharp
         //private Color[] diffuseMap;
         private int[,] heightMap;
         private Color[,] diffuseMap;
-        private Point p = new Point(100, 100);
-        private bool isIncreasing = false;
+        private PointF p = new PointF(100, 100);
         private double degrees = 0;
         private float[] yBuffer;
         public frmMain()
@@ -76,7 +75,7 @@ namespace VoxelSpaceSharp
                 txtHeightMap.Text = dialog.FileName;
             }
         }
-        private void Render(Point p, double degrees, int height, int horizon, int scale_height, int distance, int screen_width, int screen_height, Graphics g)
+        private void Render(PointF p, double degrees, int height, int horizon, int scale_height, int distance, int screen_width, int screen_height, Graphics g)
         {
             #region Solution 1
             g.Clear(Color.FromArgb(102, 163, 225));
@@ -288,21 +287,15 @@ namespace VoxelSpaceSharp
             switch(k)
             {
                 case Keys.W:
-                    p.Y -= 10;
+                    p.Y -= (float)(10 * Math.Sin(GetRadian(degrees)));
                     break;
                 case Keys.A:
-                    p.X -= 10;
+                    degrees += 10;
                     break;
                 case Keys.S:
                     p.Y += 10;
                     break;
                 case Keys.D:
-                    p.X += 10;
-                    break;
-                case Keys.N:
-                    degrees += 10;
-                    break;
-                case Keys.M:
                     degrees -= 10;
                     break;
             }
