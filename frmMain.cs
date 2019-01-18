@@ -26,9 +26,12 @@ namespace VoxelSpaceSharp
         //private Color[] diffuseMap;
         private int[,] heightMap;
         private Color[,] diffuseMap;
+        private float[] yBuffer;
+
         private PointF p = new PointF(100, 100);
         private double degrees = 0;
-        private float[] yBuffer;
+        private int horizon = 120;
+        private int distance = 300;
         public frmMain()
         {
             InitializeComponent();
@@ -36,6 +39,17 @@ namespace VoxelSpaceSharp
             timer.Tick += Timer_Tick;
             timer.Interval = 100;
             timer.Start();
+            this.MouseWheel += FrmMain_MouseWheel;
+        }
+
+        private void FrmMain_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (!rendering)
+                return;
+            if (e.Delta > 0)//Wheel Forward
+                distance -= 10;
+            else if (e.Delta < 0)//Wheel Backward
+                distance += 10;
         }
 
         private void RenderThread()
@@ -52,7 +66,7 @@ namespace VoxelSpaceSharp
         {
             if (rendering)
             {
-                Render(p, degrees, 100, 120, 120, 300, canvas.Width, canvas.Height, e.Graphics);
+                Render(p, degrees, 100, horizon, 120, distance, canvas.Width, canvas.Height, e.Graphics);
             }
         }
 
@@ -286,17 +300,23 @@ namespace VoxelSpaceSharp
             Keys k = e.KeyCode;
             switch(k)
             {
-                case Keys.W:
+                case Keys.W://Forward
                     p.Y -= (float)(10 * Math.Sin(GetRadian(degrees)));
                     break;
-                case Keys.A:
-                    degrees += 10;
-                    break;
-                case Keys.S:
+                case Keys.S://Backward
                     p.Y += 10;
                     break;
-                case Keys.D:
+                case Keys.A://Turn Left
+                    degrees += 10;
+                    break;
+                case Keys.D://Turn Right
                     degrees -= 10;
+                    break;
+                case Keys.O://Look up
+                    horizon += 10;
+                    break;
+                case Keys.P://Look down
+                    horizon -= 10;
                     break;
             }
         }
