@@ -301,10 +301,12 @@ namespace VoxelSpaceSharp
             switch(k)
             {
                 case Keys.W://Forward
-                    p.Y -= (float)(10 * Math.Sin(GetRadian(degrees)));
+                    p.X -= (float)(10 * Math.Sin(GetRadian(degrees)));
+                    p.Y -= (float)(10 * Math.Cos(GetRadian(degrees)));
                     break;
                 case Keys.S://Backward
-                    p.Y += 10;
+                    p.X += (float)(10 * Math.Sin(GetRadian(degrees)));
+                    p.Y += (float)(10 * Math.Cos(GetRadian(degrees)));
                     break;
                 case Keys.A://Turn Left
                     degrees += 10;
