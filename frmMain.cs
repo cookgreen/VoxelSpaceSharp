@@ -22,8 +22,6 @@ namespace VoxelSpaceSharp
         private Bitmap diffuseBitmap;
         private Bitmap heightBitmap;
         private bool rendering;
-        //private byte[] heightMap;
-        //private Color[] diffuseMap;
         private int[,] heightMap;
         private Color[,] diffuseMap;
         private float[] yBuffer;
@@ -91,7 +89,6 @@ namespace VoxelSpaceSharp
         }
         private void Render(PointF p, double degrees, int height, int horizon, int scale_height, int distance, int screen_width, int screen_height, Graphics g)
         {
-            #region Solution 1
             g.Clear(Color.FromArgb(102, 163, 225));
 
             yBuffer = new float[screen_width];
@@ -137,43 +134,6 @@ namespace VoxelSpaceSharp
                 z += dz;
                 dz += 0.2f;
             }
-            #endregion
-
-            #region Solution 2
-            /*var mapWidthPeriod = BITMAP_WIDTH - 1;
-            var mapHeightPeriod = BITMAP_HEIGHT - 1;
-
-            g.Clear(Color.FromArgb(102, 163, 225));
-            float ratio = (float)screen_width / (float)BITMAP_WIDTH;
-            float deltaZ = 1;
-            for (float z = 1; z < distance; z+=deltaZ)
-            {
-                PointF pLeft = new PointF(-z + p.X, -z + p.Y);
-                PointF pRight = new PointF(z + p.X, -z + p.Y);
-
-                float dxf = (float)(pRight.X - pLeft.X) / (float)screen_width;
-                int dx = (int)CustomRound(dxf * ratio, 0);
-                float dyf = (float)(pRight.Y - pLeft.Y) / (float)screen_height;
-                int dy = (int)CustomRound(dyf * ratio, 0);
-
-                float invz = (float)1 / (float)z * 240;
-
-                for (int i = 0; i < screen_width; i++)
-                {
-                    int mapOffset = (((int)pLeft.Y & mapWidthPeriod) << 10) + ((int)pLeft.X & mapHeightPeriod);
-                    float heightOfHeightMap = heightMap[mapOffset];
-                    float height_on_screen = (float)(height - heightOfHeightMap) * (float)invz + (float)horizon;
-                    if (height_on_screen > 0 && height_on_screen < screen_height)
-                    {
-                        Color color = diffuseMap[mapOffset];
-                        DrawVerticalLine(i, (int)height_on_screen, screen_height, color, g);
-                        pLeft.X += dx;
-                        pLeft.Y += dy;
-                    }
-                }
-                deltaZ += 0.005f;
-            }*/
-            #endregion
         }
 
         private double GetRadian(double degrees)
@@ -183,20 +143,11 @@ namespace VoxelSpaceSharp
 
         private void DrawVerticalLine(int x, int ytop, float ybottom, Color col, Graphics g)
         {
-            #region Solution 1
-            //float startY = ytop;
-            //float endY = ybottom;
-
-            //g.DrawLine(new Pen(col), x, startY, x, endY);
-            #endregion
-
-            #region Solution 2
             if (ytop > ybottom)
             {
                 return;
             }
             g.DrawLine(new Pen(new SolidBrush(col)), x, ytop, x, ybottom);
-            #endregion
         }
 
         double CustomRound(double value, int decimals)
@@ -241,7 +192,6 @@ namespace VoxelSpaceSharp
         {
             if (bitmap != null)
             {
-                #region Solution 1
                 heightMap = new int[bitmap.Width, bitmap.Height];
                 for (int i = 0; i < bitmap.Width; i++)
                 {
@@ -250,18 +200,6 @@ namespace VoxelSpaceSharp
                         heightMap[i, j] = bitmap.GetPixel(i, j).R;
                     }
                 }
-                #endregion
-
-                #region Solution 2
-                //heightMap = new byte[bitmap.Width * bitmap.Height];
-
-                //Rectangle rect = new Rectangle(0, 0, bitmap.Width, bitmap.Height);
-                //BitmapData bitmapData = bitmap.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-                //System.Runtime.InteropServices.Marshal.Copy(bitmapData.Scan0, heightMap, 0, bitmapData.Width * bitmap.Height);
-
-                //bitmap.UnlockBits(bitmapData);
-                #endregion
             }
         }
 
@@ -269,7 +207,6 @@ namespace VoxelSpaceSharp
         {
             if (bitmap != null)
             {
-                #region Solution 1
                 diffuseMap = new Color[bitmap.Width, bitmap.Height];
                 for (int i = 0; i < bitmap.Width; i++)
                 {
@@ -278,18 +215,6 @@ namespace VoxelSpaceSharp
                         diffuseMap[i, j] = bitmap.GetPixel(i, j);
                     }
                 }
-                #endregion
-
-                #region Solution 2
-                //diffuseMap = new Color[bitmap.Width*bitmap.Height];
-                //for (int i = 0; i < bitmap.Width; i++)
-                //{
-                //    for (int j = 0; j < bitmap.Height; j++)
-                //    {
-                //        diffuseMap[1024 * i + j] = bitmap.GetPixel(i, j);
-                //    }
-                //}
-                #endregion
             }
         }
 
