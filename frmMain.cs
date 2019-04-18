@@ -132,7 +132,7 @@ namespace VoxelSpaceSharp
                     pLeft.Y += dy;
                 }
                 z += dz;
-                dz += 0.2f;
+                dz += 0.005f;
             }
         }
 
