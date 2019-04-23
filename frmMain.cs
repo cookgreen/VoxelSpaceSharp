@@ -38,6 +38,13 @@ namespace VoxelSpaceSharp
             timer.Interval = 100;
             timer.Start();
             this.MouseWheel += FrmMain_MouseWheel;
+            mapList.Items.Clear();
+            foreach(var key in ResourceRegister.Instance.GetDiffuseMaps())
+            {
+                mapList.Items.Add(key);
+            }
+
+
         }
 
         private void FrmMain_MouseWheel(object sender, MouseEventArgs e)
@@ -65,26 +72,6 @@ namespace VoxelSpaceSharp
             if (rendering)
             {
                 Render(p, degrees, 100, horizon, 120, distance, canvas.Width, canvas.Height, e.Graphics);
-            }
-        }
-
-        private void btnDiffuseOpen_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image File|*.png";
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                txtDiffuseMap.Text = dialog.FileName;
-            }
-        }
-
-        private void btnHeightOpen_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image File|*.png";
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                txtHeightMap.Text = dialog.FileName;
             }
         }
         private void Render(PointF p, double degrees, int height, int horizon, int scale_height, int distance, int screen_width, int screen_height, Graphics g)
@@ -164,20 +151,14 @@ namespace VoxelSpaceSharp
 
         private void btnStartRender_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(txtDiffuseMap.Text))
-            {
-                MessageBox.Show("Diffuse map can't be empty!");
-                return;
-            }
+        }
 
-            if (string.IsNullOrEmpty(txtHeightMap.Text))
-            {
-                MessageBox.Show("Height map can't be empty!");
-                return;
-            }
+        private void LoadMapAndRender()
+        {
+            string selectedMap = mapList.SelectedItem.ToString();
 
-            diffuseBitmap = new Bitmap(txtDiffuseMap.Text);
-            heightBitmap = new Bitmap(txtHeightMap.Text);
+            diffuseBitmap = new Bitmap(ResourceRegister.Instance.GetDiffuseMap(selectedMap));
+            heightBitmap = new Bitmap(ResourceRegister.Instance.GetHeightMap(selectedMap));
             DIFFUSE_BITMAP_WIDTH = diffuseBitmap.Width;
             DIFFUSE_BITMAP_HEIGHT = diffuseBitmap.Height;
             HEIGHT_BITMAP_HEIGT = heightBitmap.Height;
@@ -246,6 +227,11 @@ namespace VoxelSpaceSharp
                     horizon -= 10;
                     break;
             }
+        }
+
+        private void mapList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadMapAndRender();
         }
     }
 }

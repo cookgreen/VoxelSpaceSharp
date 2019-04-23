@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceRegister.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -77,6 +78,162 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C1W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C2W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C5W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C6W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C7W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C9W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C10W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C11W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C12W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C14W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C16W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C17W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C18W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C19W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C20W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C22W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C23W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C24W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C25W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C26W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C27W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C28W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\C29W.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="maps\D25.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
