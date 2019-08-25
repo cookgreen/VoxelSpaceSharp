@@ -30,10 +30,10 @@
         {
             this.lbDiffuseMap = new System.Windows.Forms.Label();
             this.groupFile = new System.Windows.Forms.GroupBox();
+            this.mapList = new System.Windows.Forms.ComboBox();
             this.groupRender = new System.Windows.Forms.GroupBox();
             this.canvas = new System.Windows.Forms.PictureBox();
             this.grid = new System.Windows.Forms.TableLayoutPanel();
-            this.mapList = new System.Windows.Forms.ComboBox();
             this.groupFile.SuspendLayout();
             this.groupRender.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
@@ -56,10 +56,20 @@
             this.groupFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupFile.Location = new System.Drawing.Point(3, 3);
             this.groupFile.Name = "groupFile";
-            this.groupFile.Size = new System.Drawing.Size(867, 54);
+            this.groupFile.Size = new System.Drawing.Size(778, 54);
             this.groupFile.TabIndex = 6;
             this.groupFile.TabStop = false;
             this.groupFile.Text = "File";
+            // 
+            // mapList
+            // 
+            this.mapList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.mapList.FormattingEnabled = true;
+            this.mapList.Location = new System.Drawing.Point(44, 20);
+            this.mapList.Name = "mapList";
+            this.mapList.Size = new System.Drawing.Size(157, 20);
+            this.mapList.TabIndex = 1;
+            this.mapList.SelectedIndexChanged += new System.EventHandler(this.mapList_SelectedIndexChanged);
             // 
             // groupRender
             // 
@@ -67,7 +77,7 @@
             this.groupRender.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupRender.Location = new System.Drawing.Point(3, 63);
             this.groupRender.Name = "groupRender";
-            this.groupRender.Size = new System.Drawing.Size(867, 633);
+            this.groupRender.Size = new System.Drawing.Size(778, 496);
             this.groupRender.TabIndex = 7;
             this.groupRender.TabStop = false;
             this.groupRender.Text = "Viewport";
@@ -77,7 +87,7 @@
             this.canvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.canvas.Location = new System.Drawing.Point(3, 17);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(861, 613);
+            this.canvas.Size = new System.Drawing.Size(772, 476);
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_paint);
@@ -95,24 +105,14 @@
             this.grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.grid.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.grid.Size = new System.Drawing.Size(873, 699);
+            this.grid.Size = new System.Drawing.Size(784, 562);
             this.grid.TabIndex = 8;
-            // 
-            // mapList
-            // 
-            this.mapList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.mapList.FormattingEnabled = true;
-            this.mapList.Location = new System.Drawing.Point(44, 20);
-            this.mapList.Name = "mapList";
-            this.mapList.Size = new System.Drawing.Size(157, 20);
-            this.mapList.TabIndex = 1;
-            this.mapList.SelectedIndexChanged += new System.EventHandler(this.mapList_SelectedIndexChanged);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(873, 699);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.grid);
             this.KeyPreview = true;
             this.Name = "frmMain";
